@@ -1,0 +1,62 @@
+{{ partial "header.html" . }}
+<main class="cv">
+
+<h1><span class="title">Liam Bindle</span></h1>
+Email: <a href="mailto:liam.bindle@gmail.com">liam.bindle@gmail.com</a> | Phone: <a href="tel:604-906-2048">604-906-2048</a> | GitHub: <a href="https://github.com/LiamBindle">LiamBindle</a>
+<h2>Education</h2>
+{{ range .Site.Data.cv.education }}
+    <b>{{ .degree }}</b><span class="time_period">{{ .time_period }}</span><br>
+    {{ .university }}, {{ .location }}<br>
+    <ul>
+    {{ range .remarks }}
+        <li>{{ . }}</li>
+    {{ end }}
+    </ul>
+{{ end }}
+
+<h2>Experience</h2>
+{{ range .Site.Data.cv.experience }}
+    <b>{{ .job_title }}</b><span class="time_period">{{ .time_period }}</span><br>
+    {{ .employer }}, {{ .location }}<br>
+    <ul>
+    {{ range .remarks }}
+        <li>{{ . }}</li>
+    {{ end }}
+    {{ if .projects }}
+        <li style="list-style-type: none; margin-top: 0.5em;"><b>Highlighted Projects</b></li>
+        {{ range .projects }}
+        <li>{{ . }}</li>
+        {{ end }}
+    {{ end }}
+    </ul>
+{{ end }}
+
+<h2>Side Projects</h2>
+{{ range .Site.Data.cv.projects }}
+    <b>{{ .name }}</b> | {{ .role }} | <a href="{{ .link }}">[Link]</a> <span class="time_period">{{ .time_period }}</span><br>
+    <ul>
+    {{ range .remarks }}
+        <li>{{ . }}</li>
+    {{ end }}
+    </ul>
+{{ end }}
+
+<h2>Competencies</h2>
+<table class="competencies">
+{{ range .Site.Data.cv.competencies}}
+    <tr>
+        <td class="col1"><i>{{ .category }}</i></td>
+        <td>{{ .items }}</td>
+    </tr>
+{{ end }}
+</table>
+<br>
+
+<h2>Publications</h2>
+{{ range .Site.Data.cv.publications }}
+    {{ .authors }}, <b>{{ .title }}</b>, {{ .journal }}, doi:{{ .doi }}, {{ .date }}. <a href="{{ .link }}">[Link]</a> <br><br>
+{{ end }}
+
+</main>
+
+{{ partial "footer.html" . }}
